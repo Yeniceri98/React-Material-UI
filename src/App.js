@@ -11,8 +11,14 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles, ThemeProvider, createMuiTheme } from '@material-ui/core/styles';   // Style eklenmesi (Butona eklenecek)
 import { green, orange } from '@material-ui/core/colors';   // Aşağıda main color olarak yeşili ve secondary color olarak turuncuyu belirlemiştik
 
+// Adding Typography
 import 'fontsource-roboto';
 import Typography from '@material-ui/core/Typography';
+
+
+// Adding Container
+import Container from '@material-ui/core/Container';
+
 
 const useStyles = makeStyles({
     root: {
@@ -27,16 +33,16 @@ const useStyles = makeStyles({
 
 const theme = createMuiTheme({
     typography: {    // Altta oluşturulan Typography'nin düzenlenmesi
-        h3: {
+        h2: {
             fontSize: 36,
             marginBottom: 15
         }
     },
     palette: {
         primary: {
-            main: green[700],    // Yeşil main color olacak ve "Save" "Discard" gibi kısımlar yeşil rengine dönecek çünkü <ThemeProvider /> component'ini hepsini kapsayacak şekilde yerleştirdik (Köşeli parantez içine yazılan değer ne kadar koyu olduğunu belirtiyor)
+            main: green[700],    // Yeşil rengi main color olacak ve "Save" "Discard" gibi kısımlar yeşil rengine dönecek çünkü <ThemeProvider /> component'ini hepsini kapsayacak şekilde yerleştirdik (Köşeli parantez içine yazılan değer ne kadar koyu olduğunu belirtiyor)
         },
-        secondary: {             // Turuncu Secondary color olacak (Testing Checkbox'ın yanındaki kaydetme simgesi turuncu rengine döner)
+        secondary: {             // Turuncu rengi secondary color olacak (Testing Checkbox'ın yanındaki kaydetme simgesi turuncu rengine döner)
             main: orange[500],
         }
     }
@@ -73,44 +79,46 @@ function CheckboxExample() {
 function App() {
     return (
         <ThemeProvider theme={theme}>
-            <div className="App">
-                <div className="App-header">
-                    <Typography variant="h3" component="div">
-                        Welcome to MUI
-                    </Typography>
-                    <Typography variant="body1">
-                        Learn how to use Material UI
-                    </Typography>
-                    <StyledButton />
-                    <TextField 
-                        variant="outlined"
-                        color="primary"
-                        type="email"
-                        label="E-Mail"
-                        placeholder="test@test.com"
-                    />
-                    <CheckboxExample />
-                    <ButtonGroup variant="contained" color="primary">   
-                        <Button 
-                            startIcon={<SaveIcon />}     // Save icon başta yer alır (sonda kalması için endIcon deriz)
-                            onClick={() => alert("You saved it")} 
-                            // variant="contained"  Yukarıdaki ButtonGroup'da tanımlandığı için burada tanımlamaya gerek yok
-                            // color="primary"
-                            size="large"
-                        >
-                            Save
-                        </Button>
-                        <Button 
-                            endIcon={<DeleteIcon />}        
-                            // variant="contained" 
-                            // color="secondary"
-                            size="large"
-                        >
-                            Discard
-                        </Button>
-                    </ButtonGroup>
+            <Container maxWidth="sm">   {/* Tüm ekranın sm olmasını sağladık. Sağda ve solda beyaz boşluklar olur */}
+                <div className="App">
+                    <div className="App-header">
+                        <Typography variant="h2" component="div">    {/* component="div" diyerek h2 olan satırın div olarak gözükmesini sağlarız. Yani styling olarak h2 olmaya devam eder fakat div olarak gözükür. F12 > Elements kısmından bunu gözlemleyebiliriz */}
+                            Welcome to MUI
+                        </Typography>
+                        <Typography variant="body1">
+                            Learn how to use Material UI
+                        </Typography>
+                        <StyledButton />
+                        <TextField 
+                            variant="outlined"
+                            color="primary"
+                            type="email"
+                            label="E-Mail"
+                            placeholder="test@test.com"
+                        />
+                        <CheckboxExample />
+                        <ButtonGroup variant="contained" color="primary">   
+                            <Button 
+                                startIcon={<SaveIcon />}     // Save icon başta yer alır (sonda kalması için endIcon deriz)
+                                onClick={() => alert("You saved it")} 
+                                // variant="contained"  Yukarıdaki ButtonGroup'da tanımlandığı için burada tanımlamaya gerek yok
+                                // color="primary"
+                                size="large"
+                            >
+                                Save
+                            </Button>
+                            <Button 
+                                endIcon={<DeleteIcon />}        
+                                // variant="contained" 
+                                // color="secondary"
+                                size="large"
+                            >
+                                Discard
+                            </Button>
+                        </ButtonGroup>
+                    </div>
                 </div>
-            </div>
+            </Container>
         </ThemeProvider>
     );
 }
